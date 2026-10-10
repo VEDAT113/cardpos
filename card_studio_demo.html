@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Card Studio — Demo</title>
+<style>
+:root{--bg:#0b1020;--panel:#121a2d;--panel2:#18233a;--line:#263550;--text:#eef4ff;--muted:#91a2bf;--mint:#75f0c2;--blue:#7aa7ff;--orange:#ffcc80}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top left,#162746 0,#0b1020 48%,#080c17 100%);font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;color:var(--text);min-height:100vh}
+.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.side{border-right:1px solid var(--line);padding:24px 16px;background:#0a1020c9}.brand{display:flex;gap:12px;align-items:center;padding:4px 10px 28px;font-weight:800;font-size:17px;letter-spacing:.2px}.logo{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--mint),#4e8dff);display:grid;place-items:center;color:#071320;font-weight:900}.eyebrow{font-size:10px;color:#7185a7;letter-spacing:1.8px;font-weight:800;padding:10px 12px}.nav{display:flex;flex-direction:column;gap:5px}.nav button{border:0;background:transparent;color:#9eafcb;text-align:left;padding:12px;border-radius:10px;display:flex;gap:12px;align-items:center;cursor:pointer;font:inherit}.nav button.active,.nav button:hover{background:#1a2943;color:white}.nav .ico{width:18px;text-align:center}.sidefoot{position:sticky;top:calc(100vh - 95px);margin-top:70px;padding:14px;border:1px solid var(--line);border-radius:14px;background:#101a2b}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--mint);margin-right:7px}
+main{padding:28px clamp(18px,4vw,48px);max-width:1500px;width:100%;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:30px}.crumb{color:var(--muted);font-size:12px}.topright{display:flex;align-items:center;gap:10px}.pill{border:1px solid #3b4a65;border-radius:999px;padding:7px 11px;color:#c8d6ec;font-size:11px}.avatar{width:34px;height:34px;border-radius:50%;background:#253b5c;display:grid;place-items:center;font-weight:800}.page{display:none}.page.active{display:block}.head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:22px}.head h1{font-size:clamp(25px,3vw,34px);line-height:1.15;margin:5px 0 8px;letter-spacing:-1px}.sub{color:var(--muted);margin:0}.tag{font-size:10px;color:var(--mint);letter-spacing:1.5px;font-weight:800}.btn{border:1px solid #344663;background:#1b2a43;color:#eef4ff;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:700}.btn.primary{background:var(--mint);color:#071b18;border-color:var(--mint)}.btn:hover{filter:brightness(1.08)}.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}.panel{background:linear-gradient(145deg,#141f34,#101829);border:1px solid var(--line);border-radius:18px;padding:20px;min-width:0;box-shadow:0 14px 35px #00000012}.span8{grid-column:span 8}.span4{grid-column:span 4}.span6{grid-column:span 6}.span12{grid-column:span 12}.panelhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.panel h2{font-size:15px;margin:0}.muted{color:var(--muted)}.mini{font-size:11px;color:var(--muted)}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}.stat{padding:17px;border:1px solid var(--line);border-radius:14px;background:#111b2d}.statlabel{font-size:11px;color:var(--muted)}.statval{font-size:25px;font-weight:800;letter-spacing:-.7px;margin-top:7px}.statval small{font-size:12px;color:var(--mint);font-weight:700}.cardvisual{min-height:210px;padding:23px;border-radius:18px;background:radial-gradient(circle at 90% 5%,#3b6796 0,transparent 35%),linear-gradient(135deg,#203a55,#101d32 70%);border:1px solid #47617e;position:relative;overflow:hidden}.cardvisual:after{content:"";position:absolute;width:230px;height:230px;border:1px solid #ffffff16;border-radius:50%;right:-60px;bottom:-145px;box-shadow:0 0 0 24px #ffffff08,0 0 0 48px #ffffff05}.cardtop{display:flex;justify-content:space-between;align-items:center}.chip{width:36px;height:27px;border-radius:6px;border:1px solid #d4c89d;background:linear-gradient(135deg,#b8ad82,#e7ddb2,#9f956d);margin:23px 0 17px}.cardnum{font-size:17px;letter-spacing:2px;font-weight:700}.cardbottom{display:flex;justify-content:space-between;gap:10px;margin-top:16px;font-size:10px;color:#bdcce0;text-transform:uppercase;letter-spacing:1px}.cardbottom b{display:block;color:white;font-size:12px;letter-spacing:.5px;margin-top:3px}.balance{font-size:40px;font-weight:850;letter-spacing:-1.7px;margin:5px 0}.balance small{font-size:15px;color:var(--muted);letter-spacing:0}.scanbox{border:1px dashed #426184;background:#0d1728;border-radius:15px;padding:19px;text-align:center}.scanicon{font-size:28px;margin-bottom:8px}.scanbox h3{margin:0 0 5px;font-size:15px}.scanbox p{margin:0 auto 15px;max-width:360px;color:var(--muted);font-size:12px}.field{width:100%;background:#0a1323;border:1px solid #2b3b56;border-radius:9px;padding:12px;color:white;font:inherit;outline:none}.field:focus{border-color:var(--blue)}.row{display:flex;gap:8px}.row .field{flex:1;min-width:0}.barcode{height:44px;margin:18px auto 8px;max-width:330px;background:repeating-linear-gradient(90deg,#e7f0ff 0 2px,transparent 2px 4px,#e7f0ff 4px 5px,transparent 5px 8px,#e7f0ff 8px 11px,transparent 11px 14px);opacity:.8;border-radius:2px}.status{font-size:11px;color:var(--muted);margin-top:9px}.status.good{color:var(--mint)}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:13px 9px;border-bottom:1px solid #24334b;font-size:12px}th{color:#8296b6;font-weight:600}td{color:#dbe6f7}.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#b8d0ff}.badge{border-radius:999px;padding:4px 8px;background:#183a35;color:var(--mint);font-size:10px}.badge.gray{background:#263249;color:#aab9d2}.activity{display:flex;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid #24334b}.activity:last-child{border:0}.activityicon{width:35px;height:35px;border-radius:11px;background:#1c2c45;display:grid;place-items:center}.activity strong{display:block;font-size:12px}.activity small{color:var(--muted)}.settingsrow{display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid #24334b;gap:16px}.settingsrow:last-child{border:0}.toggle{width:40px;height:23px;border-radius:99px;background:#29405b;position:relative;cursor:pointer;border:0}.toggle:after{content:"";position:absolute;width:17px;height:17px;border-radius:50%;left:3px;top:2px;background:#9fb0c8;transition:.2s}.toggle.on{background:#236c59}.toggle.on:after{left:20px;background:var(--mint)}.notice{border:1px solid #725b35;background:#2b2418;color:#f1d6a7;border-radius:12px;padding:12px 14px;font-size:12px;margin-bottom:16px}.toast{position:fixed;right:22px;bottom:22px;background:#16372f;border:1px solid #2c725f;color:#caffed;padding:13px 17px;border-radius:12px;box-shadow:0 10px 30px #0006;opacity:0;transform:translateY(10px);transition:.25s;pointer-events:none}.toast.show{opacity:1;transform:translateY(0)}.empty{padding:30px;text-align:center;color:var(--muted)}
+@media(max-width:900px){.app{grid-template-columns:1fr}.side{border-right:0;border-bottom:1px solid var(--line);padding:12px}.brand{padding:4px 8px 12px}.nav{flex-direction:row;overflow:auto}.nav button{white-space:nowrap;padding:9px}.eyebrow,.sidefoot{display:none}main{padding:20px 14px}.span8,.span4,.span6{grid-column:span 12}.stats{grid-template-columns:1fr}.head{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div class="brand"><div class="logo">C</div><div>Card Studio <div class="mini">DEMO CONSOLE</div></div></div>
+  <div class="eyebrow">WORKSPACE</div>
+  <nav class="nav" id="nav">
+    <button class="active" data-page="overview"><span class="ico">▦</span> Genel Bakış</button>
+    <button data-page="scanner"><span class="ico">▥</span> Barkod Tarayıcı</button>
+    <button data-page="cards"><span class="ico">▰</span> Demo Kartlar</button>
+    <button data-page="activity"><span class="ico">↗</span> İşlem Geçmişi</button>
+    <button data-page="analytics"><span class="ico">◷</span> Analitik</button>
+    <button data-page="settings"><span class="ico">⚙</span> Ayarlar</button>
+  </nav>
+  <div class="sidefoot"><div style="font-weight:700;margin-bottom:6px"><span class="dot"></span>Demo modu açık</div><div class="mini">Bu arayüz yalnızca yerel simülasyon yapar. Gerçek ödeme veya kart doğrulaması yoktur.</div></div>
+</aside>
+<main>
+  <div class="top"><div class="crumb">Workspace <span style="color:#536887">/</span> <span id="crumb">Genel Bakış</span></div><div class="topright"><span class="pill">● YALNIZCA DEMO</span><div class="avatar">D</div></div></div>
+  <section class="page active" id="overview">
+    <div class="head"><div><div class="tag">CARD OPERATIONS / 01</div><h1>Kontrol paneli</h1><p class="sub">Sahte kart ve barkod akışlarını güvenli şekilde simüle et.</p></div><button class="btn primary" onclick="go('scanner')">＋ Yeni tarama</button></div>
+    <div class="notice">Demo uyarısı: Kart ve barkod değerleri rastgele üretilir; gerçek Shopify ürünü, ödeme kartı veya bakiye sistemiyle bağlantılı değildir.</div>
+    <div class="stats">
+      <div class="stat"><div class="statlabel">Demo bakiye</div><div class="statval">1,00 <small>DEMO</small></div></div>
+      <div class="stat"><div class="statlabel">Oluşturulan demo kart</div><div class="statval" id="statCards">03</div></div>
+      <div class="stat"><div class="statlabel">Başarılı simülasyon</div><div class="statval" id="statScans">08</div></div>
+    </div>
+    <div class="grid">
+      <div class="panel span8"><div class="panelhead"><h2>Aktif demo kart</h2><span class="badge">SIMÜLASYON</span></div>
+        <div class="cardvisual"><div class="cardtop"><b>◈ CARD STUDIO</b><span style="font-size:11px;color:#c1d2e7">VIRTUAL / DEMO</span></div><div class="chip"></div><div class="cardnum" id="cardNum">DEMO •••• •••• 4821</div><div class="cardbottom"><div>KART SAHİBİ<b id="cardName">ALEX MORGAN</b></div><div>SON KULLANIM<b id="cardExp">12/29</b></div><div>BAKİYE<b>1,00 DEMO</b></div></div></div>
+        <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:15px"><button class="btn primary" onclick="newCard()">Rastgele demo kart oluştur</button><button class="btn" onclick="go('cards')">Kartları görüntüle →</button></div>
+      </div>
+      <div class="panel span4"><div class="panelhead"><h2>Hızlı barkod testi</h2><span class="mini">MANUEL</span></div><div class="scanbox"><div class="scanicon">▥</div><h3>Barkod simülasyonu</h3><p>Örnek bir demo kodu gir veya rastgele kod üret. Kamera okuma ayrı tarayıcı sekmesindedir.</p><div class="row"><input class="field" id="quickCode" placeholder="DEMO-4821" maxlength="32"></div><button class="btn primary" style="width:100%;margin-top:9px" onclick="scan('quickCode')">Kodu tara · bip</button></div><div class="status" id="quickStatus">Tarama bekleniyor.</div></div>
+      <div class="panel span6"><div class="panelhead"><h2>Son aktiviteler</h2><button class="btn" onclick="go('activity')">Tümünü gör</button></div><div id="recent"></div></div>
+      <div class="panel span6"><div class="panelhead"><h2>Sistem durumu</h2><span class="badge">ÇALIŞIYOR</span></div><div class="settingsrow"><div><b>Yerel simülasyon</b><div class="mini">Veriler bu sayfada geçicidir</div></div><span class="badge">Aktif</span></div><div class="settingsrow"><div><b>Sesli bildirim</b><div class="mini">Tarama tamamlanınca kısa bip</div></div><button class="toggle on" id="soundToggle" onclick="toggleSound()"></button></div><div class="settingsrow"><div><b>Gerçek ödeme bağlantısı</b><div class="mini">Devre dışı</div></div><span class="badge gray">Kapalı</span></div></div>
+    </div>
+  </section>
+  <section class="page" id="scanner">
+    <div class="head"><div><div class="tag">INPUT / 02</div><h1>Barkod tarayıcı</h1><p class="sub">Kart arkasındaki barkod alanını temsil eden demo kodunu tara.</p></div><span class="pill">BİP SESİ ETKİNLEŞTİRİLEBİLİR</span></div>
+    <div class="grid"><div class="panel span8"><div class="panelhead"><h2>Tarama istasyonu</h2><span class="badge gray">KAMERA KULLANMAZ</span></div><div class="scanbox"><div class="scanicon">▥</div><h3>Kamera ile barkod oku</h3><p>Kamera izni vererek gerçek barkod/QR içeriğini okuyabilirsin. Okunan içerik yalnızca bu demo arayüzünde gösterilir; ödeme veya kart doğrulaması yapılmaz.</p><div id="cameraWrap" style="display:none;max-width:560px;margin:12px auto"><video id="cameraVideo" playsinline muted style="width:100%;max-height:320px;background:#050912;border-radius:12px;border:1px solid #334965;object-fit:cover"></video></div><div class="row" style="justify-content:center;flex-wrap:wrap;margin:10px 0"><button class="btn primary" id="startCameraBtn" onclick="startCamera()">▣ Kamerayı başlat</button><button class="btn" id="stopCameraBtn" onclick="stopCamera()" disabled>■ Kamerayı durdur</button></div><div class="status" id="cameraStatus">Kamera henüz başlatılmadı.</div><div style="height:1px;background:#2b3b56;margin:18px 0"></div><h3>Alternatif: kodu elle gir</h3><p>Kamera desteklenmiyorsa barkod metnini buraya yazabilirsin.</p><input class="field" id="scanCode" placeholder="Örn. DEMO-4821-X7" maxlength="120"><div class="barcode"></div><button class="btn" style="width:100%;max-width:330px" onclick="scan('scanCode')">Demo taraması yap ve sesi çal</button><div class="status" id="scanStatus">Hazır · kod bekleniyor</div></div></div>
+    <div class="panel span4"><div class="panelhead"><h2>Tarama sonucu</h2><span class="badge" id="scanBadge">BEKLEMEDE</span></div><div class="balance" id="scanBalance">1,00 <small>DEMO</small></div><p class="muted">Sabit simülasyon bakiyesi</p><div class="settingsrow"><span class="muted">Kod durumu</span><b id="scanResult">Bekleniyor</b></div><div class="settingsrow"><span class="muted">Kart tipi</span><b>Demo</b></div><div class="settingsrow"><span class="muted">Ödeme bağlantısı</span><b>Yok</b></div><button class="btn" style="width:100%;margin-top:15px" onclick="randomCode()">Rastgele demo barkod üret</button></div></div>
+  </section>
+  <section class="page" id="cards">
+    <div class="head"><div><div class="tag">INVENTORY / 03</div><h1>Demo kartlar</h1><p class="sub">Tamamen uydurma ve ödeme için kullanılamayan test kayıtları.</p></div><button class="btn primary" onclick="newCard()">＋ Kart oluştur</button></div>
+    <div class="panel"><div class="panelhead"><h2>Kart envanteri</h2><span class="mini" id="cardCount">3 kayıt</span></div><table><thead><tr><th>Kart etiketi</th><th>Demo numara</th><th>Son kullanım</th><th>Bakiye</th><th>Durum</th></tr></thead><tbody id="cardTable"></tbody></table></div>
+  </section>
+  <section class="page" id="activity">
+    <div class="head"><div><div class="tag">AUDIT LOG / 04</div><h1>İşlem geçmişi</h1><p class="sub">Bu oturumdaki sahte tarama ve kart oluşturma olayları.</p></div><button class="btn" onclick="clearLogs()">Geçmişi temizle</button></div>
+    <div class="panel"><div class="panelhead"><h2>Son olaylar</h2><span class="badge gray">YEREL</span></div><div id="allActivity"></div></div>
+  </section>
+  <section class="page" id="analytics">
+    <div class="head"><div><div class="tag">INSIGHTS / 05</div><h1>Analitik</h1><p class="sub">Canlı ödeme verisi değil, bu oturumun demo sayaçları.</p></div></div>
+    <div class="stats"><div class="stat"><div class="statlabel">Tarama sayısı</div><div class="statval" id="anScans">08</div></div><div class="stat"><div class="statlabel">Kart sayısı</div><div class="statval" id="anCards">03</div></div><div class="stat"><div class="statlabel">Demo bakiye</div><div class="statval">1,00</div></div></div>
+    <div class="panel"><div class="panelhead"><h2>Oturum özeti</h2><span class="badge">SIMÜLASYON</span></div><div class="settingsrow"><div><b>Başarılı demo tarama oranı</b><div class="mini">Bu ekranda her tarama başarılı kabul edilir</div></div><b>100%</b></div><div class="settingsrow"><div><b>Toplam demo bakiye</b><div class="mini">Gerçek para değeri yoktur</div></div><b>1,00 DEMO</b></div></div>
+  </section>
+  <section class="page" id="settings">
+    <div class="head"><div><div class="tag">PREFERENCES / 06</div><h1>Ayarlar</h1><p class="sub">Demo arayüzü tercihlerini yönet.</p></div></div>
+    <div class="panel"><div class="panelhead"><h2>Genel tercihler</h2></div><div class="settingsrow"><div><b>Tarama sesi</b><div class="mini">Başarılı simülasyonda kısa bip sesi üret</div></div><button class="toggle on" id="soundToggle2" onclick="toggleSound()"></button></div><div class="settingsrow"><div><b>Demo bakiyesi</b><div class="mini">Ekranlarda gösterilen sabit değer</div></div><b>1,00 DEMO</b></div><div class="settingsrow"><div><b>Harici servisler</b><div class="mini">Shopify, banka veya ödeme API'si bağlı değil</div></div><span class="badge gray">Bağlı değil</span></div><div class="settingsrow"><div><b>Oturum verilerini sıfırla</b><div class="mini">Aktivite kaydı ve sayaçları temizle</div></div><button class="btn" onclick="resetApp()">Sıfırla</button></div></div>
+  </section>
+</main></div>
+<div class="toast" id="toast">✓ Demo işlemi tamamlandı</div>
+<script>
+const names=['ALEX MORGAN','JAMIE PARK','TAYLOR REED','CASEY LANE','RILEY JAMES','SKYLER WELLS','JORDAN BLAKE','MORGAN KAI'];
+let soundOn=true, scans=8, cards=[
+ {name:'ALEX MORGAN',num:'4821',exp:'12/29',code:'DEMO-4821-X7'},
+ {name:'JAMIE PARK',num:'1904',exp:'08/28',code:'DEMO-1904-K2'},
+ {name:'TAYLOR REED',num:'7365',exp:'04/30',code:'DEMO-7365-P9'}
+], logs=[
+ {title:'Demo barkod tarandı',detail:'DEMO-4821-X7',time:'Az önce'},
+ {title:'Demo kart oluşturuldu',detail:'•••• 1904',time:'2 dk önce'},
+ {title:'Demo barkod tarandı',detail:'DEMO-7365-P9',time:'5 dk önce'}
+];
+function beep(){if(!soundOn)return;try{const C=window.AudioContext||window.webkitAudioContext;if(!C)return;const c=new C(),o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.value=880;g.gain.value=.06;o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+.13);o.onended=()=>c.close()}catch(e){}}
+function toast(msg='✓ Demo işlemi tamamlandı'){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
+function go(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));const b=document.querySelector(`[data-page="${id}"]`);document.getElementById('crumb').textContent=b?b.textContent.trim():'Genel Bakış';render()}
+document.getElementById('nav').addEventListener('click',e=>{const b=e.target.closest('button[data-page]');if(b)go(b.dataset.page)});
+function randomPart(n){return Math.floor(Math.random()*n)}
+function randomCode(){const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let s='DEMO-';for(let i=0;i<4;i++)s+=chars[randomPart(chars.length)];s+='-';for(let i=0;i<3;i++)s+=chars[randomPart(chars.length)];document.getElementById('scanCode').value=s;document.getElementById('quickCode').value=s;toast('Rastgele demo kod üretildi')}
+function scan(id){const el=document.getElementById(id),v=(el.value||'').trim();if(!v){el.value='DEMO-'+cards[0].num+'-X7'}const code=el.value.trim();scans++;beep();logs.unshift({title:'Demo barkod tarandı',detail:code,time:'Az önce'});document.getElementById('scanStatus').textContent='✓ Demo taraması başarılı · '+code;document.getElementById('scanStatus').className='status good';document.getElementById('quickStatus').textContent='✓ Simülasyon tamamlandı · '+code;document.getElementById('quickStatus').className='status good';document.getElementById('scanBadge').textContent='OK';document.getElementById('scanResult').textContent='Başarılı (demo)';document.getElementById('scanBalance').innerHTML='1,00 <small>DEMO</small>';render();toast('✓ Bip! Sahte barkod okundu')}
+function newCard(){const name=names[randomPart(names.length)],num=String(1000+randomPart(9000)),exp=String(1+randomPart(12)).padStart(2,'0')+'/'+String(28+randomPart(5)),code='DEMO-'+num+'-'+['A4','K2','X7','P9','M3'][randomPart(5)];const c={name,num,exp,code};cards.unshift(c);logs.unshift({title:'Demo kart oluşturuldu',detail:name+' · •••• '+num,time:'Az önce'});document.getElementById('cardNum').textContent='DEMO •••• •••• '+num;document.getElementById('cardName').textContent=name;document.getElementById('cardExp').textContent=exp;render();toast('✓ Rastgele demo kart oluşturuldu')}
+function toggleSound(){soundOn=!soundOn;['soundToggle','soundToggle2'].forEach(id=>{const e=document.getElementById(id);if(e)e.classList.toggle('on',soundOn)});toast(soundOn?'Tarama sesi açıldı':'Tarama sesi kapatıldı')}
+function clearLogs(){logs=[];render();toast('İşlem geçmişi temizlendi')}
+function resetApp(){scans=0;cards=[];logs=[];render();toast('Demo oturumu sıfırlandı')}
+function render(){const r=logs.slice(0,4).map(x=>`<div class="activity"><div class="activityicon">↗</div><div><strong>${esc(x.title)}</strong><small>${esc(x.detail)} · ${esc(x.time)}</small></div></div>`).join('')||'<div class="empty">Henüz aktivite yok.</div>';document.getElementById('recent').innerHTML=r;document.getElementById('allActivity').innerHTML=logs.map(x=>`<div class="activity"><div class="activityicon">↗</div><div><strong>${esc(x.title)}</strong><small>${esc(x.detail)} · ${esc(x.time)}</small></div></div>`).join('')||'<div class="empty">İşlem geçmişi boş.</div>';document.getElementById('cardTable').innerHTML=cards.map(c=>`<tr><td>${esc(c.name)}</td><td class="code">DEMO •••• ${esc(c.num)}</td><td>${esc(c.exp)}</td><td>1,00 DEMO</td><td><span class="badge">Simülasyon</span></td></tr>`).join('')||'<tr><td colspan="5" class="empty">Henüz demo kart yok.</td></tr>';document.getElementById('statCards').textContent=String(cards.length).padStart(2,'0');document.getElementById('statScans').textContent=String(scans).padStart(2,'0');document.getElementById('anScans').textContent=scans;document.getElementById('anCards').textContent=cards.length;document.getElementById('cardCount').textContent=cards.length+' kayıt'}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+let cameraStream=null, cameraTimer=null, barcodeDetector=null, lastDetected='';
+async function startCamera(){
+  const status=document.getElementById('cameraStatus');
+  const video=document.getElementById('cameraVideo');
+  if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+    status.textContent='Bu tarayıcı kamera erişimini desteklemiyor. HTTPS veya localhost üzerinden açmayı dene.';
+    status.className='status'; return;
+  }
+  if(!('BarcodeDetector' in window)){
+    status.textContent='Bu tarayıcıda yerleşik barkod algılama API’si bulunamadı. Güncel Chrome/Edge veya elle kod girişini kullan.';
+    status.className='status'; return;
+  }
+  try{
+    barcodeDetector=new BarcodeDetector({formats:['code_128','code_39','ean_13','ean_8','upc_a','upc_e','qr_code','itf','codabar','data_matrix','pdf417']});
+    cameraStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false});
+    video.srcObject=cameraStream;
+    document.getElementById('cameraWrap').style.display='block';
+    await video.play();
+    document.getElementById('startCameraBtn').disabled=true;
+    document.getElementById('stopCameraBtn').disabled=false;
+    status.textContent='Kamera açık · barkodu kadraja getir';
+    status.className='status good';
+    const detect=async()=>{
+      if(!cameraStream || video.readyState<2){cameraTimer=requestAnimationFrame(detect);return;}
+      try{
+        const found=await barcodeDetector.detect(video);
+        if(found && found.length){
+          const value=String(found[0].rawValue||'').slice(0,120);
+          if(value && value!==lastDetected){
+            lastDetected=value;
+            document.getElementById('scanCode').value=value;
+            status.textContent='✓ Barkod okundu: '+value;
+            status.className='status good';
+            // A real code is shown as read; this does not validate cards or payments.
+            beep();
+            document.getElementById('scanStatus').textContent='Kamera ile okundu · '+value;
+            document.getElementById('scanStatus').className='status good';
+            document.getElementById('scanBadge').textContent='OKUNDU';
+            document.getElementById('scanResult').textContent='Barkod okundu';
+            logs.unshift({title:'Kamerayla barkod okundu',detail:value,time:'Az önce'});
+            render();
+            toast('✓ Bip! Barkod kamerayla okundu');
+            stopCamera();
+            return;
+          }
+        }
+      }catch(err){ /* keep scanning while frames are available */ }
+      cameraTimer=requestAnimationFrame(detect);
+    };
+    cameraTimer=requestAnimationFrame(detect);
+  }catch(err){
+    stopCamera();
+    status.textContent=err && err.name==='NotAllowedError'?'Kamera izni verilmedi. Tarayıcı ayarlarından kamera iznini aç.':'Kamera açılamadı. HTTPS/localhost kullanıp kamera iznini kontrol et.';
+    status.className='status';
+  }
+}
+function stopCamera(){
+  if(cameraTimer){cancelAnimationFrame(cameraTimer);cameraTimer=null;}
+  if(cameraStream){cameraStream.getTracks().forEach(track=>track.stop());cameraStream=null;}
+  const video=document.getElementById('cameraVideo');
+  if(video)video.srcObject=null;
+  const start=document.getElementById('startCameraBtn'),stop=document.getElementById('stopCameraBtn');
+  if(start)start.disabled=false;
+  if(stop)stop.disabled=true;
+  const wrap=document.getElementById('cameraWrap');
+  if(wrap)wrap.style.display='none';
+}
+window.addEventListener('pagehide',stopCamera);
+render();
+</script>
+</body></html>
